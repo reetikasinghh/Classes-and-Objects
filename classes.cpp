@@ -74,80 +74,82 @@ Volume of cuboid = 52416*/
 //WAP TO FIND THE VOL OF THE SHAPES 
 #include<iostream>
 using namespace std;
+
 class shapes
 {
-    public:
-    double h;
-    double wid;
-    double len;
-    double r;
-    double s;
-    cuboid()
+public:
+    double h;  // Height for cuboid
+    double wid; // Width for cuboid
+    double len; // Length for cuboid
+    double r;  // Radius for sphere
+    double s;  // Side length for cube
+
+    // Constructor for cuboid
+    shapes(double height, double width, double length)
     {
-       cout<<"Enter the dimensions of cuboid :";
-       cin>>h;
-       cin>>wid;
-       cin>>len;
-    
+        h = height;
+        wid = width;
+        len = length;
     }
 
-    cube()
+    // Constructor for cube
+    shapes(double sideLength)
     {
-        cout<<"Enter the dimensions of cube :";
-        cin>>s;
+        s = sideLength;
     }
 
-    sphere()
+    // Constructor for sphere
+    shapes(bool isSphere, double radius)
     {
-        cout<<"Enter the dimensions of sphere :";
-        cin>>r;
+        if (isSphere) {
+            r = radius;
+        }
     }
 
+    // Method to calculate and display the volume of a cuboid
     double cuboid_volume()
     {
-        double vol=h*wid*len;
-        cout<<"volume of the cuboid is = "<<vol<<endl;
+        double vol = h * wid * len;
+        cout << "Volume of the cuboid is = " << vol << endl;
         return vol;
     }
 
+    // Method to calculate and display the volume of a cube
     double cube_volume()
     {
-        double cube_vol = s*s*s;
-        cout<<"Volume of the cube is = "<<cube_vol<<endl;
+        double cube_vol = s * s * s;
+        cout << "Volume of the cube is = " << cube_vol << endl;
+        return cube_vol;
     }
 
-     double sphere_volume()
+    // Method to calculate and display the volume of a sphere
+    double sphere_volume()
     {
-        double sphere_vol = 1.33 * 3.14 * r * r * r ;
-        cout<<"Volume of the sphere is = "<<sphere_vol<<endl;
+        double sphere_vol = 1.33 * 3.14 * r * r * r;
+        cout << "Volume of the sphere is = " << sphere_vol << endl;
+        return sphere_vol;
     }
-
-     double cone_volume()
-    {
-        double cone_vol = s*s*s;
-        cout<<"Volume of the cone is = "<<cone_vol<<endl;
-    }
-
 };
- int main()
-{
-    shapes cuboid1;
-    shapes cube1;
-    shapes sphere1;
 
-    cuboid1.cuboid();
-    cube1.cube();
-    sphere1.sphere();
+int main()
+{
+    // Create instances of different shapes with their respective constructors
+    shapes cuboid1(2.0, 3.0, 5.0);
+    shapes cube1(2.0);
+    shapes sphere1(true, 2.0);  // Use a boolean flag to specify sphere
 
     double vCu;
     double vC;
     double vS;
 
-    vCu=cuboid1.cuboid_volume();
-    vC=cube1.cube_volume();
-    vS=sphere1.sphere_volume();
+    // Calculate and store the volumes
+    vCu = cuboid1.cuboid_volume();
+    vC = cube1.cube_volume();
+    vS = sphere1.sphere_volume();
 
+    return 0;
 }
+
 /*OUTPUT
 Enter the dimensions of cuboid :2 2 2
 Enter the dimensions of cube :2
@@ -158,7 +160,7 @@ Volume of the sphere is = 33.4096
 */
 
 
-Write the program using class which will display the given Date,Month,Year*/
+//Write the program using class which will display the given Date,Month,Year*/
 #include<iostream>
 using namespace std;
 
@@ -212,109 +214,3 @@ Enter the year :23
 The date is :2th August 2023
 */
 
-/*Name-Purvansha Gehlod
-PRN-22070123088
-EXP-11*/
-#include<iostream>
-using namespace std;
-class Date {
-
-
-private:
-    string month_names[12] = {"Jan", "Feb", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    // int days_in_month[12];
-    
-    void day_in_month(int days_in_month[12]){
-        // month_index = month
-        int month_needed;
-        if (is_leap() == 1)
-        {
-            days_in_month[1] = 29;
-        }
-    }
-    
-    string week_day_names[7] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
-public:
-    int date;
-    int month;
-    int year;
-    string first_day;
-    bool is_leap(){
-       
-        if (year % 400 == 0) {
-            return true;
-        }
-
-        else if (year % 100 == 0) {
-            return false;
-        }
-        else if (year % 4 == 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    void disp_month()
-    {
-        cout << "The current month is: " << month_names[month - 2] << endl;
-    }
-
-    void weekday(){
-        int days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        day_in_month(days_in_month);
-        int week_index = 0;
-        for (int i = 0; i < 7; i++)
-        {
-            if (first_day == week_day_names[i])
-            {
-                week_index = i;
-            }
-            
-        }
-        int no_days = 0;
-        for (int i = 0; i < month-1; i++)
-        {
-            no_days = no_days +days_in_month[i];
-        }
-        no_days = no_days + date;
-        int week = no_days%7;
-        week = week + week_index;
-        if (week >= 7)
-        {
-            week = week - 7;
-        }
-        string weekday_name = week_day_names[week-2];
-        cout <<"The current week is: "<< weekday_name;
-
-
-    }
-
-};
-int main()
-{
-    Date d1;
-    cout << "Enter Date: ";
-    cin >> d1.date;
-    cout << "Enter Month: ";
-    cin >> d1.month;
-    cout << "Enter Year: ";
-    cin >> d1.year;
-    cout << "Enter First Day of The Year: "<< endl;
-    cin >> d1.first_day;
-    d1.disp_month();
-    // cout << d1.is_leap();
-    d1.weekday();
-    return 0;
-
-}
-/*OUTPUT
-Enter Date: 31
-Enter Month: 8  
-Enter Year: 23
-Enter First Day of The Year: 
-Sunday
-The current month is: July
-The current week is: thursday
-*/
